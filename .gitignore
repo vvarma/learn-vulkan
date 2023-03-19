@@ -1,3 +1,5 @@
+.envrc
 .cache/
 local_build/
 compile_commands.json
+.python-version

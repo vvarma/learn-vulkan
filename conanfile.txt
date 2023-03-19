@@ -12,3 +12,7 @@ spirv-tools/1.3.236.0
 cmake_paths
 cmake_find_package
 
+[imports]
+lib, *.so -> lib @ root_package=vulkan-validationlayers
+res/vulkan/explicit_layer.d, *.json -> lib @ root_package=vulkan-validationlayers
+
