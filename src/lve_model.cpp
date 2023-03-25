@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
+#include <functional>
 #include <vulkan/vulkan_core.h>
 
 namespace lve {
@@ -83,6 +84,10 @@ void Model::draw(VkCommandBuffer commandBuffer) {
     vkCmdDrawIndexed(commandBuffer, index_count_, 1, 0, 0, 0);
   else
     vkCmdDraw(commandBuffer, vertex_count_, 1, 0, 0);
+}
+
+bool Model::Vertex::operator==(const Model::Vertex &other) const {
+  return position == other.position && color == other.color;
 }
 
 std::vector<VkVertexInputBindingDescription>

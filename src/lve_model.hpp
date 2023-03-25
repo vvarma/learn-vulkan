@@ -8,6 +8,8 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <glm/glm.hpp>
 #include <vulkan/vulkan_core.h>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/hash.hpp>
 
 namespace lve {
 class Model {
@@ -15,6 +17,7 @@ public:
   struct Vertex {
     glm::vec3 position{};
     glm::vec3 color{};
+    bool operator==(const Vertex &other) const;
     static std::vector<VkVertexInputBindingDescription>
     getBindingDescriptions();
     static std::vector<VkVertexInputAttributeDescription>
@@ -47,3 +50,15 @@ private:
 };
 
 } // namespace lve
+
+namespace std {
+template <> struct hash<lve::Model::Vertex> {
+  size_t operator()(lve::Model::Vertex const &vertex) const {
+    size_t seed = 0;
+    hash<glm::vec3> hasher{};
+    glm::detail::hash_combine(seed, hasher(vertex.position));
+    glm::detail::hash_combine(seed, hasher(vertex.color));
+    return seed;
+  }
+};
+} // namespace std
