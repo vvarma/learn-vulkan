@@ -5,14 +5,19 @@ vulkan-headers/1.3.236.0
 vulkan-loader/1.3.236.0
 vulkan-validationlayers/1.3.236.0
 shaderc/2021.1
+spirv-headers/1.3.236.0
 spirv-tools/1.3.236.0
-
+moltenvk/1.2.2
+glslang/11.5.0
 
 [generators]
 cmake_paths
 cmake_find_package
 
 [imports]
+lib, *.dylib -> lib @ root_package=moltenvk
+lib, *.json -> lib @ root_package=moltenvk
 lib, *.so -> lib @ root_package=vulkan-validationlayers
+lib, *.dylib -> lib @ root_package=vulkan-validationlayers
 res/vulkan/explicit_layer.d, *.json -> lib @ root_package=vulkan-validationlayers
 
